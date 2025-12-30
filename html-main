@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dylan | Roblox Systems Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+  background:#0b0e14;
+  color:#e5e7eb;
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+.section { margin-bottom:4rem; }
+
+.card {
+  background:#131825;
+  border-radius:16px;
+  border:1px solid #1f2937;
+  transition:.25s;
+}
+.card:hover {
+  transform:translateY(-6px);
+  border-color:#3b82f6;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+.accent {
+  height:4px;
+  width:44px;
+  background:#3b82f6;
+  border-radius:4px;
+  margin-bottom:1rem;
+}
+
+/* HERO GLOW */
+.hero-glow {
+  position:relative;
+}
+.hero-glow::before {
+  content:"";
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.35),transparent 70%);
+  filter:blur(30px);
+  animation:pulse 6s infinite;
+  z-index:-1;
+}
+@keyframes pulse {
+  0%,100% { transform:scale(.95); opacity:.6; }
+  50% { transform:scale(1.05); opacity:1; }
+}
+
+/* CODE CARD */
+.code-card {
+  background:linear-gradient(180deg,#141a2a,#0f1422);
+  font-family:monospace;
+  font-size:.85rem;
+  line-height:1.45;
+  color:#c7d2fe;
+}
+.code-line { white-space:pre; }
+
+/* BACKGROUND */
+#bg {
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+</style>
+</head>
+
+<body class="max-w-6xl mx-auto px-4 py-10">
+
+<canvas id="bg"></canvas>
+
+<audio id="music" src="background.mp3" loop></audio>
+
+<script>
+const CONFIG = {
+  profile: {
+    name: "Dylan",
+    role: "Roblox Systems Developer",
+    description:
+      "I build scalable Roblox systems with clean architecture, strong performance, and long-term maintainability.",
+    avatar: "ProfilePictureV1.png"
+  },
+
+  whyHireMe: [
+    "Clean, modular & scalable systems",
+    "Strong focus on optimisation & performance",
+    "Readable, maintainable code",
+    "Clear communication & documentation"
+  ],
+
+  stats: {
+    rating: 4.9
+  },
+
+  games: [
+    {
+      name: "Catch A Zoo",
+      thumbnail: "CatchAZooThumb.webp",
+      ccu: 5041,
+      visits: 7104712,
+      link: "https://www.roblox.com"
+    }
+  ],
+
+  systems: [
+    {
+      name: "Pseudo-random Terrain Generation",
+      image: "terrain.webp",
+      description:
+        "Procedural terrain generation using seeded noise, biome blending, and player-based chunk loading.",
+      links: {
+        Video: "#",
+        Game: "#",
+        Code: "#"
+      }
+    },
+    {
+      name: "Tycoon Framework",
+      image: "tycoon.webp",
+      description:
+        "Modular tycoon framework with clean datastore handling and scalable system architecture.",
+      links: {
+        Video: "#",
+        Game: "#"
+      }
+    }
+  ],
+
+  about: {
+    code: [
+      "const developer = {",
+      "  name: 'Dylan',",
+      "  role: 'Roblox Systems Developer',",
+      "  experience: '5+ years',",
+      "  focus: ['Systems', 'Performance', 'Scalability'],",
+      "  mindset: 'Always improving'",
+      "}"
+    ],
+    story: [
+      "I started developing on Roblox with a strong focus on systems rather than individual mechanics.",
+      "Over time, I specialized in scalable frameworks, optimisation, and long-term maintainability.",
+      "I enjoy building clean architectures that other developers can easily understand and extend."
+    ],
+    stats: [
+      { value: "5+", label: "Years Experience" },
+      { value: "20+", label: "Systems Built" },
+      { value: "10+", label: "Projects Shipped" },
+      { value: "∞", label: "Learning" }
+    ]
+  },
+
+  contact: {
+    Discord: "#",
+    Twitter: "#",
+    Roblox: "#"
+  }
+}
+</script>
+
+<!-- HERO -->
+<section class="section grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+  <div>
+    <h1 class="text-5xl font-bold" id="name"></h1>
+    <p class="text-blue-400 mt-3" id="role"></p>
+    <p class="text-gray-400 mt-4 max-w-xl" id="desc"></p>
+  </div>
+  <div class="flex justify-center">
+    <div class="hero-glow">
+      <img id="avatar" class="w-64 h-64 rounded-full border-2 border-blue-500 object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ME -->
+<section class="section">
+  <div class="accent"></div>
+  <h2 class="text-3xl font-bold text-center">About Me</h2>
+  <p class="text-gray-400 text-center mt-2">Get to know me through code</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+    <div class="card p-5 code-card">
+      <div class="flex gap-2 mb-3">
+        <span class="w-3 h-3 bg-red-400 rounded-full"></span>
+        <span class="w-3 h-3 bg-yellow-400 rounded-full"></span>
+        <span class="w-3 h-3 bg-green-400 rounded-full"></span>
+      </div>
+      <div id="about-code"></div>
+    </div>
+
+    <div>
+      <h3 class="text-2xl font-bold mb-4">My Story</h3>
+      <div id="about-story" class="text-gray-400 space-y-4"></div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12" id="about-stats"></div>
+</section>
+
+<!-- STATS -->
+<section class="section grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="card p-6 text-center">
+    <h2 id="stat-games" class="text-2xl font-bold"></h2>
+    <p class="text-gray-400 text-sm">Games</p>
+  </div>
+  <div class="card p-6 text-center">
+    <h2 id="stat-ccu" class="text-2xl font-bold"></h2>
+    <p class="text-gray-400 text-sm">Peak CCU</p>
+  </div>
+  <div class="card p-6 text-center">
+    <h2 id="stat-visits" class="text-2xl font-bold"></h2>
+    <p class="text-gray-400 text-sm">Visits</p>
+  </div>
+  <div class="card p-6 text-center">
+    <h2 id="stat-rating" class="text-2xl font-bold"></h2>
+    <p class="text-gray-400 text-sm">Rating</p>
+  </div>
+</section>
+
+<!-- WHY HIRE + CONTACT -->
+<section class="section grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="card p-6">
+    <h2 class="text-2xl font-bold mb-4">Why hire me</h2>
+    <ul id="why" class="list-disc list-inside text-gray-400 space-y-1"></ul>
+  </div>
+
+  <div class="card p-6" id="contact">
+    <h2 class="text-2xl font-bold mb-4">Contact</h2>
+  </div>
+</section>
+
+<footer class="text-center text-gray-500 text-sm">
+  © 2025 Dylan — Roblox Systems Developer
+</footer>
+
+<script>
+const $ = id => document.getElementById(id)
+
+$("name").innerText = CONFIG.profile.name
+$("role").innerText = CONFIG.profile.role
+$("desc").innerText = CONFIG.profile.description
+$("avatar").src = CONFIG.profile.avatar
+
+$("stat-games").innerText = CONFIG.games.length
+$("stat-ccu").innerText = CONFIG.games.reduce((a,g)=>a+g.ccu,0).toLocaleString()
+$("stat-visits").innerText = CONFIG.games.reduce((a,g)=>a+g.visits,0).toLocaleString()
+$("stat-rating").innerText = CONFIG.stats.rating + " ★"
+
+CONFIG.whyHireMe.forEach(t=>{
+  const li=document.createElement("li")
+  li.innerText=t
+  $("why").appendChild(li)
+})
+
+Object.entries(CONFIG.contact).forEach(([k,v])=>{
+  const a=document.createElement("a")
+  a.href=v
+  a.target="_blank"
+  a.className="block text-blue-400 hover:underline"
+  a.innerText=k
+  $("contact").appendChild(a)
+ո՜})
+
+CONFIG.about.code.forEach(l=>{
+  const d=document.createElement("div")
+  d.className="code-line"
+  d.innerText=l
+  $("about-code").appendChild(d)
+})
+
+CONFIG.about.story.forEach(p=>{
+  const el=document.createElement("p")
+  el.innerText=p
+  $("about-story").appendChild(el)
+})
+
+CONFIG.about.stats.forEach(s=>{
+  const el=document.createElement("div")
+  el.className="card p-6 text-center"
+  el.innerHTML=`<div class="text-3xl font-bold text-blue-400">${s.value}</div><div class="text-gray-400 mt-2">${s.label}</div>`
+  $("about-stats").appendChild(el)
+})
+
+const c=document.getElementById("bg"),ctx=c.getContext("2d")
+let w,h,p=[]
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+resize();onresize=resize
+for(let i=0;i<80;i++)p.push({x:Math.random()*w,y:Math.random()*h,v:Math.random()*0.4+0.1})
+function draw(){
+  ctx.clearRect(0,0,w,h)
+  p.forEach(o=>{
+    o.y+=o.v;if(o.y>h)o.y=0
+    ctx.fillStyle="rgba(59,130,246,.15)"
+    ctx.beginPath()
+    ctx.arc(o.x,o.y,1.5,0,Math.PI*2)
+    ctx.fill()
+  })
+  requestAnimationFrame(draw)
+}
+draw()
+
+const m=document.getElementById("music")
+m.volume=.15
+document.body.addEventListener("click",()=>m.play(),{once:true})
+</script>
+
+</body>
+</html>
