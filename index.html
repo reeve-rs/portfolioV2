@@ -1,260 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Dylan | Roblox Systems Developer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Name – Portfolio</title>
 
 <style>
-body {
-  background: radial-gradient(1200px 600px at 50% 0%, rgba(59,130,246,.15), transparent),
-              #0b0e14;
-  color:#e5e7eb;
-  font-family:Inter,sans-serif;
+:root{
+  --bg:#0b1116;
+  --card:#121c22;
+  --accent:#19e0d6;
+  --accent-soft:#0fb9b1;
+  --text:#eaf6f6;
+  --muted:#9fb4b7;
 }
 
-.section { margin-bottom:4rem; }
-
-.card {
-  background:#131825;
-  border-radius:16px;
-  border:1px solid #1f2937;
-  transition:transform .25s, box-shadow .25s, border-color .25s;
-}
-.card:hover {
-  transform:translateY(-4px);
-  border-color:#3b82f6;
-  box-shadow:0 15px 40px rgba(59,130,246,.15);
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:radial-gradient(circle at 70% 20%,#0e3a3f,transparent 50%),var(--bg);
+  color:var(--text);
 }
 
-.accent {
-  height:4px;
-  width:44px;
-  background:#3b82f6;
-  border-radius:4px;
-  margin-bottom:1rem;
+/* ---------- GLOBAL ---------- */
+section{padding:90px 8vw}
+h1,h2,h3{margin:0}
+h2{
+  text-align:center;
+  font-size:42px;
+  color:var(--accent);
+}
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin-top:8px;
+  margin-bottom:60px;
+}
+.btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+  color:#001;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+}
+.card{
+  background:linear-gradient(180deg,#132128,#0f191f);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  transition:.35s ease;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 30px 90px rgba(0,0,0,.6)}
+
+/* ---------- HERO ---------- */
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.hero h1{
+  font-size:64px;
+  color:var(--accent);
+}
+.hero p{
+  max-width:520px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.hero-actions{margin-top:30px;display:flex;gap:16px;flex-wrap:wrap}
+.profile{
+  position:relative;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  margin:auto;
+}
+.profile::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--accent),transparent 60%);
+  opacity:.25;
+}
+.profile img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  position:relative;
+  z-index:2;
 }
 
-.code-card {
-  background:linear-gradient(180deg,#141a2a,#0f1422);
-  font-family:monospace;
-  font-size:.85rem;
-  line-height:1.5;
+/* ---------- STATS ---------- */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:24px;
+  margin-top:60px;
+}
+.stat h3{font-size:36px;color:var(--accent)}
+.stat span{color:var(--muted)}
+
+/* ---------- WHY WORK WITH ME ---------- */
+.why{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  margin-top:50px;
+}
+.why .card{display:flex;gap:14px;align-items:center}
+
+/* ---------- PROJECTS ---------- */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+.projects .btn{margin-top:14px}
+
+/* ---------- TESTIMONIALS ---------- */
+.slider{
+  display:flex;
+  gap:20px;
+  overflow:hidden;
+}
+.slide{
+  min-width:320px;
+  opacity:.4;
+  transform:scale(.9);
+  transition:.4s;
+}
+.slide.active{
+  opacity:1;
+  transform:scale(1);
 }
 
-.star { color:#facc15; }
-
-details summary {
+/* ---------- FAQ ---------- */
+.faq{max-width:900px;margin:auto}
+.faq-item{
+  margin-bottom:14px;
+  overflow:hidden;
+}
+.faq-q{
   cursor:pointer;
-  list-style:none;
+  padding:20px;
+  background:var(--card);
+  border-radius:14px;
 }
-details[open] summary { color:#60a5fa; }
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  background:#0f191f;
+  padding:0 20px;
+}
+.faq-item.open .faq-a{
+  max-height:200px;
+  padding:20px;
+}
 
-.floating-bg {
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background:
-    radial-gradient(400px 200px at 10% 30%, rgba(59,130,246,.08), transparent),
-    radial-gradient(500px 300px at 90% 60%, rgba(34,197,94,.08), transparent);
-  animation: float 20s linear infinite alternate;
+/* ---------- FOOTER ---------- */
+footer{
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
 }
-@keyframes float {
-  from { transform:translateY(0); }
-  to { transform:translateY(-40px); }
+
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .profile{margin-top:40px}
 }
 </style>
 </head>
 
-<body class="max-w-6xl mx-auto px-4 py-12">
-
-<div class="floating-bg"></div>
-
-<script>
-const CONFIG = {
-  profile: {
-    name: "Dylan",
-    role: "Roblox Systems Developer",
-    description: "I build scalable Roblox systems with clean architecture, strong performance, and long-term maintainability.",
-    avatar: "ProfilePictureV1.png"
-  },
-
-  stats: {
-    rating: 4.9,
-    reviews: 12
-  },
-
-  games: [
-    {
-      name: "Catch A Zoo",
-      thumbnail: "CatchAZooThumb.webp",
-      ccu: 5041,
-      visits: 7104712,
-      link: "https://www.roblox.com"
-    }
-  ],
-
-  systems: [
-    {
-      name: "Pseudo-Random Terrain Generation",
-      image: "TerrainGenerationThumb.png",
-      description: "Seed-based Perlin terrain with biome blending and chunk streaming for performance.",
-      showcase: "https://vimeo.com"
-    },
-    {
-      name: "Tycoon Framework",
-      image: "TycoonFrameworkThumb.png",
-      description: "Modular tycoon framework with datastore handling and clean architecture.",
-      showcase: "https://www.roblox.com"
-    }
-  ],
-
-  about: {
-    code: [
-      "const developer = {",
-      "  name: 'Dylan',",
-      "  experience: '5+ years',",
-      "  focus: ['Systems', 'Performance'],",
-      "  mindset: 'Clean & scalable',",
-      "}"
-    ],
-    story: [
-      "I focus on building systems rather than one-off mechanics.",
-      "My work prioritizes optimisation, scalability, and long-term maintainability.",
-      "I write code that other developers can easily understand and extend."
-    ]
-  },
-
-  contact: {
-    discord: "https://discord.com/users/yourid",
-    twitter: "https://twitter.com/yourname",
-    roblox: "https://roblox.com/users/yourid/profile"
-  },
-
-  faq: [
-    { q:"How long does a project take?", a:"Most systems take 3–14 days depending on complexity." },
-    { q:"Do you offer bug fixes?", a:"Yes — bug fixes are included for completed work." },
-    { q:"What do you specialize in?", a:"Frameworks, datastores, performance, and scalable systems." }
-  ]
-}
-</script>
+<body>
 
 <!-- HERO -->
-<section class="section flex flex-col md:flex-row gap-8 items-center">
-  <img id="avatar" class="w-28 h-28 rounded-full border-2 border-blue-500">
+<section class="hero">
   <div>
-    <h1 class="text-4xl font-bold" id="name"></h1>
-    <p class="text-blue-400 font-medium" id="role"></p>
-    <p class="text-gray-400 mt-2 max-w-xl" id="desc"></p>
+    <h1>Your Name</h1>
+    <p>I build scalable systems and high-quality experiences for games and platforms.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#projects">View Projects</a>
+      <a class="btn" href="#contact">Contact Me</a>
+    </div>
+
+    <div class="stats">
+      <div class="card stat"><h3>1</h3><span>Games</span></div>
+      <div class="card stat"><h3>5,041</h3><span>Peak CCU</span></div>
+      <div class="card stat"><h3>7,104,712</h3><span>Visits</span></div>
+      <div class="card stat"><h3>4.9 ★</h3><span>Reviews</span></div>
+    </div>
+  </div>
+
+  <div class="profile">
+    <img src="https://via.placeholder.com/600" />
   </div>
 </section>
 
-<!-- STATS -->
-<section class="section grid grid-cols-2 md:grid-cols-4 gap-4">
-  <div class="card p-5 text-center"><h2 id="stat-games" class="text-2xl font-bold"></h2><p class="text-gray-400 text-sm">Games</p></div>
-  <div class="card p-5 text-center"><h2 id="stat-ccu" class="text-2xl font-bold"></h2><p class="text-gray-400 text-sm">Peak CCU</p></div>
-  <div class="card p-5 text-center"><h2 id="stat-visits" class="text-2xl font-bold"></h2><p class="text-gray-400 text-sm">Visits</p></div>
-  <div class="card p-5 text-center">
-    <h2 class="text-2xl font-bold">
-      <span id="stat-rating"></span>
-      <span class="star">★</span>
-    </h2>
-    <p class="text-gray-400 text-sm">Reviews</p>
+<!-- WHY WORK WITH ME -->
+<section>
+  <h2>Why Work With Me</h2>
+  <div class="why">
+    <div class="card">💬 Direct communication</div>
+    <div class="card">⏱ Transparent timelines</div>
+    <div class="card">⚙ Clean & scalable systems</div>
+    <div class="card">🚀 Post-delivery support</div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section">
-  <div class="accent"></div>
-  <h2 class="text-3xl font-bold text-center">About Me</h2>
-  <p class="text-gray-400 text-center mt-2">Get to know me through code</p>
-
-  <div class="grid md:grid-cols-2 gap-8 mt-8">
-    <div class="card p-5 code-card" id="about-code"></div>
-    <div class="card p-5 space-y-3" id="about-story"></div>
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Systems & Frameworks</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>Inventory System</h3>
+      <p>Optimized, modular inventory with saving & replication.</p>
+      <a class="btn" href="#">Showcase</a>
+    </div>
+    <div class="card">
+      <h3>Parkour Framework</h3>
+      <p>Sliding, vaulting, climbing with smooth transitions.</p>
+      <a class="btn" href="#">Showcase</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:50px">
+    <a class="btn" href="#">All Projects</a>
   </div>
 </section>
 
-<!-- SYSTEMS -->
-<section class="section">
-  <div class="accent"></div>
-  <h2 class="text-3xl font-bold mb-4">Frameworks & Systems</h2>
-  <div id="systems" class="grid md:grid-cols-2 gap-6"></div>
-</section>
-
-<!-- WHY / CONTACT -->
-<section class="section grid md:grid-cols-2 gap-6">
-  <div class="card p-6">
-    <h3 class="text-xl font-bold mb-2">Why Hire Me</h3>
-    <p class="text-gray-400">
-      Clean code, strong optimisation, and systems designed to scale.
-      I focus on long-term quality rather than quick hacks.
-    </p>
-  </div>
-  <div class="card p-6">
-    <h3 class="text-xl font-bold mb-2">Contact</h3>
-    <a class="block text-blue-400" href="${CONFIG.contact.discord}" target="_blank">Discord</a>
-    <a class="block text-blue-400" href="${CONFIG.contact.twitter}" target="_blank">Twitter</a>
-    <a class="block text-blue-400" href="${CONFIG.contact.roblox}" target="_blank">Roblox</a>
+<!-- TESTIMONIALS -->
+<section>
+  <h2>What People Say</h2>
+  <p class="subtitle">Kind words from clients & collaborators</p>
+  <div class="slider" id="slider">
+    <div class="card slide active">“Amazing systems and support.”</div>
+    <div class="card slide">“Very clean code and communication.”</div>
+    <div class="card slide">“Would hire again instantly.”</div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="section">
-  <div class="accent"></div>
-  <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-  <div id="faq" class="space-y-3"></div>
+<section>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">How long does a project take?</div>
+      <div class="faq-a">Depends on complexity, usually 3–14 days.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer support?</div>
+      <div class="faq-a">Yes, bug fixes and help after delivery.</div>
+    </div>
+  </div>
 </section>
 
-<footer class="text-center text-gray-500 text-sm">
-  © 2025 Dylan — Roblox Systems Developer
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p class="subtitle">Let’s build something great</p>
+  <div style="text-align:center">
+    <a class="btn" href="mailto:you@email.com">Email Me</a>
+  </div>
+</section>
+
+<footer>
+  © Your Name – All rights reserved
 </footer>
 
 <script>
-const $=id=>document.getElementById(id)
-$("name").innerText=CONFIG.profile.name
-$("role").innerText=CONFIG.profile.role
-$("desc").innerText=CONFIG.profile.description
-$("avatar").src=CONFIG.profile.avatar
+// FAQ
+document.querySelectorAll(".faq-q").forEach(q=>{
+  q.onclick=()=>q.parentElement.classList.toggle("open")
+});
 
-$("stat-games").innerText=CONFIG.games.length
-$("stat-ccu").innerText=CONFIG.games.reduce((a,g)=>a+g.ccu,0).toLocaleString()
-$("stat-visits").innerText=CONFIG.games.reduce((a,g)=>a+g.visits,0).toLocaleString()
-$("stat-rating").innerText=CONFIG.stats.rating
-
-CONFIG.about.code.forEach(l=>{
-  const d=document.createElement("div")
-  d.innerText=l
-  $("about-code").appendChild(d)
-})
-CONFIG.about.story.forEach(p=>{
-  const d=document.createElement("p")
-  d.innerText=p
-  $("about-story").appendChild(d)
-})
-
-CONFIG.systems.forEach(s=>{
-  const d=document.createElement("div")
-  d.className="card overflow-hidden"
-  d.innerHTML=`
-    <img src="${s.image}" class="w-full aspect-video object-cover">
-    <div class="p-4">
-      <h3 class="font-semibold">${s.name}</h3>
-      <p class="text-gray-400 text-sm mt-1">${s.description}</p>
-      <a href="${s.showcase}" target="_blank" class="text-blue-400 text-sm mt-2 inline-block">View showcase →</a>
-    </div>`
-  $("systems").appendChild(d)
-})
-
-CONFIG.faq.forEach(f=>{
-  const d=document.createElement("details")
-  d.className="card p-4"
-  d.innerHTML=`<summary class="font-semibold">${f.q}</summary><p class="text-gray-400 mt-2">${f.a}</p>`
-  $("faq").appendChild(d)
-})
+// Slider
+let slides=document.querySelectorAll(".slide");
+let i=0;
+setInterval(()=>{
+  slides.forEach(s=>s.classList.remove("active"));
+  slides[i%slides.length].classList.add("active");
+  i++;
+},3000);
 </script>
 
 </body>
